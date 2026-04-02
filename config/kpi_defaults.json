@@ -1,0 +1,30 @@
+{
+  "description": "デフォルト転換率（実績データが溜まるまで使用）",
+  "rates": {
+    "dm_to_meeting": {
+      "value": 0.10,
+      "label": "DM → 商談",
+      "note": "パーソナライズDMで10%が目安"
+    },
+    "approved_to_dm": {
+      "value": 0.60,
+      "label": "承認 → DM送信",
+      "note": "承認後にDMを送る実行率"
+    },
+    "request_to_approved": {
+      "value": 0.40,
+      "label": "申請 → 承認",
+      "note": "コメント接点ありで40%が目安"
+    },
+    "comment_to_request": {
+      "value": 0.50,
+      "label": "コメント → 申請",
+      "note": "反応があった相手に申請"
+    },
+    "target_to_comment": {
+      "value": 0.30,
+      "label": "ターゲット → コメント",
+      "note": "リスト中コメント可能な投稿がある割合"
+    }
+  }
+}

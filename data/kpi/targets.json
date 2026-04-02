@@ -1,0 +1,28 @@
+{
+  "month": "2026-04",
+  "goal_meetings": 5,
+  "calculated_at": "2026-04-02T12:49:52.393955+09:00",
+  "conversion_rates": {
+    "dm_to_meeting": 0.1,
+    "approved_to_dm": 0.6,
+    "request_to_approved": 0.4,
+    "comment_to_request": 0.5,
+    "target_to_comment": 0.3
+  },
+  "required_actions": {
+    "dms_sent": 50,
+    "connections_approved": 84,
+    "connection_requests": 210,
+    "comments_on_targets": 420,
+    "target_list_size": 1400,
+    "posts_personal": 12,
+    "posts_company": 4
+  },
+  "daily_actions": {
+    "comments": 20,
+    "connection_requests": 10,
+    "dms": 3,
+    "post_days_per_week": 3
+  },
+  "rate_source": "default"
+}

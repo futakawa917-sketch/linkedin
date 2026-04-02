@@ -1,0 +1,59 @@
+name: Weekly Post Generation
+
+on:
+  schedule:
+    - cron: '0 22 * * 0'  # Monday 7:00 AM JST (Sunday 22:00 UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate-posts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate weekly posts
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/generate_posts.py
+
+      - name: Create PR for review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          WEEK_DATE=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+          BRANCH="posts/${WEEK_DATE}"
+          git checkout -b "$BRANCH"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add posts/
+          if ! git diff --staged --quiet; then
+            git commit -m "Generate posts for week of ${WEEK_DATE}"
+            git push -u origin "$BRANCH"
+            gh pr create \
+              --title "投稿レビュー: ${WEEK_DATE}週" \
+              --body "$(cat <<'PREOF'
+          ## 今週の投稿ドラフト
+
+          AI生成された投稿です。以下を確認してください：
+          - [ ] フック（1行目）は目を引くか
+          - [ ] 内容は正確か
+          - [ ] トーンは適切か
+          - [ ] CTAは自然か
+
+          確認後、マージで承認となります。
+          PREOF
+          )"
+          fi

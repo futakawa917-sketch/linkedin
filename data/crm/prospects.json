@@ -1,0 +1,19 @@
+{
+  "status_flow": [
+    "未アプローチ",
+    "コメント済",
+    "申請済",
+    "承認済",
+    "DM済",
+    "アポ獲得",
+    "商談済"
+  ],
+  "timing_rules": {
+    "未アプローチ": { "next_action": "投稿にコメント", "days": 3 },
+    "コメント済": { "next_action": "つながり申請", "days": 2 },
+    "申請済": { "next_action": "リマインド確認", "days": 7 },
+    "承認済": { "next_action": "DM送信", "days": 3 },
+    "DM済": { "next_action": "フォローアップ", "days": 5 }
+  },
+  "prospects": []
+}

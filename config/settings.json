@@ -1,0 +1,39 @@
+{
+  "project": "snshack-linkedin",
+  "accounts": {
+    "personal": {
+      "name": "個人アカウント",
+      "role": "営業の主戦場。専門性・事例・エンゲージメント投稿でリード獲得",
+      "posts_per_week": 3
+    },
+    "company": {
+      "name": "企業アカウント",
+      "role": "ブランディング・信頼構築の看板。個人投稿の再利用＋企業視点の発信",
+      "posts_per_week": 1
+    }
+  },
+  "target": {
+    "industry": ["IT・SaaS", "人材", "コンサル", "マーケティング"],
+    "company_size": "10〜300名",
+    "decision_maker_titles": ["代表取締役", "取締役", "マーケティング責任者", "事業部長"],
+    "pain_points": [
+      "SNS集客をやりたいが何から始めればいいかわからない",
+      "採用コストが高く、SNSで採用ブランディングしたい",
+      "広告費が高騰し、オーガニック集客に切り替えたい",
+      "自社でSNS運用しているが成果が出ない"
+    ]
+  },
+  "kpi": {
+    "monthly_meeting_goal": 5,
+    "working_days_per_month": 22
+  },
+  "posting": {
+    "schedule_days": ["月", "水", "金"],
+    "post_type_ratio": {
+      "expertise": 0.40,
+      "case_study": 0.30,
+      "engagement": 0.20,
+      "cta": 0.10
+    }
+  }
+}

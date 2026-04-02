@@ -1,0 +1,38 @@
+name: Monthly KPI Update
+
+on:
+  schedule:
+    - cron: '0 1 1 * *'  # 1st of month, 10:00 AM JST (01:00 UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-kpi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Update conversion rates from actuals
+        run: python scripts/update_conversion_rates.py
+
+      - name: Recalculate KPI targets
+        run: python scripts/kpi_calculator.py
+
+      - name: Commit updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --staged --quiet || git commit -m "Monthly KPI update for $(TZ=Asia/Tokyo date +%Y-%m)"
+          git push
